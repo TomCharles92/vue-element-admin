@@ -1,13 +1,19 @@
 <template>
   <div :class="classObj" class="app-wrapper">
+    <!-- 移动端 && 侧边栏已打开 click: 点击外部则关闭侧边栏 -->
     <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
+    <!-- 侧边栏 -->
     <sidebar class="sidebar-container" />
     <div :class="{hasTagsView:needTagsView}" class="main-container">
       <div :class="{'fixed-header':fixedHeader}">
+        <!-- 顶部导航栏 -->
         <navbar />
+        <!-- 页面小便签 -->
         <tags-view v-if="needTagsView" />
       </div>
+      <!-- 主内容区域 -->
       <app-main />
+      <!-- 右侧设置栏 -->
       <right-panel v-if="showSettings">
         <settings />
       </right-panel>
