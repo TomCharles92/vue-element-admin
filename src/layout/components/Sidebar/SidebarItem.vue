@@ -10,8 +10,10 @@
 
     <el-submenu v-else ref="subMenu" :index="resolvePath(item.path)" popper-append-to-body>
       <template slot="title">
+        <!-- 显示 icon 和 title -->
         <item v-if="item.meta" :icon="item.meta && item.meta.icon" :title="item.meta.title" />
       </template>
+      <!-- 回调自己 -->
       <sidebar-item
         v-for="child in item.children"
         :key="child.path"
@@ -57,23 +59,28 @@ export default {
     return {}
   },
   methods: {
+    // 计算：是否只有一个子路由
     hasOneShowingChild(children = [], parent) {
+      // 筛选子路由，去掉要隐藏的
       const showingChildren = children.filter(item => {
         if (item.hidden) {
           return false
         } else {
           // Temp set(will be used if only has one showing child)
+          // 临时赋值，如果只有一个子路由，则会被使用。否则会被覆盖
           this.onlyOneChild = item
           return true
         }
       })
 
       // When there is only one child router, the child router is displayed by default
+      // 只有一个子路由
       if (showingChildren.length === 1) {
         return true
       }
 
       // Show parent if there are no child router to display
+      // 没有子路由，直接显示父路由
       if (showingChildren.length === 0) {
         this.onlyOneChild = { ... parent, path: '', noShowingChildren: true }
         return true

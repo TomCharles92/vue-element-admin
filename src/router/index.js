@@ -20,6 +20,8 @@ import nestedRouter from './modules/nested'
  * alwaysShow: true               if set true, will always show the root menu
  *                                if not set alwaysShow, when item has more than one children route,
  *                                it will becomes nested mode, otherwise not show the root menu
+ *                                如果设置为true，则直接呈现根路由；
+ *                                如果为false，当该路由有子路由时，会成为嵌套路由，不呈现根路由。
  * redirect: noRedirect           if set noRedirect will no redirect in the breadcrumb
  * name:'router-name'             the name is used by <keep-alive> (must set!!!)
  * meta : {
@@ -39,6 +41,7 @@ import nestedRouter from './modules/nested'
  * all roles can be accessed
  */
 export const constantRoutes = [
+  // 不知道干嘛的
   {
     path: '/redirect',
     component: Layout,
