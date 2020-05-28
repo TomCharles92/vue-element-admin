@@ -1,5 +1,6 @@
 <template>
   <div v-if="!item.hidden">
+    <!-- 只有一个子路由 && (没有子路由 || 不展示子路由) && 使用嵌套路由  -->
     <template v-if="hasOneShowingChild(item.children,item) && (!onlyOneChild.children||onlyOneChild.noShowingChildren)&&!item.alwaysShow">
       <app-link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
         <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{'submenu-title-noDropdown':!isNest}">
@@ -82,12 +83,14 @@ export default {
       // Show parent if there are no child router to display
       // 没有子路由，直接显示父路由
       if (showingChildren.length === 0) {
+        // 将父路由赋值给
         this.onlyOneChild = { ... parent, path: '', noShowingChildren: true }
         return true
       }
 
       return false
     },
+    // 计算：路由路径
     resolvePath(routePath) {
       if (isExternal(routePath)) {
         return routePath
