@@ -17,7 +17,7 @@
       >
         <!-- v-for: 循环路由数组 -->
         <!-- item: 路由对象 -->
-        <!-- base-path: route.path -->
+        <!-- base-path: route.path 即路由表中的path属性-->
         <sidebar-item v-for="route in permission_routes" :key="route.path" :item="route" :base-path="route.path" />
       </el-menu>
     </el-scrollbar>
